@@ -3,15 +3,11 @@ import sys
 from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
-
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import ModelTrainerConfig, ModelTrainer
 
-from src.components.data_transformation import DataTransformation
-from src.components.data_transformation import DataTransformationConfig
-
-from src.components.model_trainer import ModelTrainerConfig
-from src.components.model_trainer import ModelTrainer
 @dataclass
 class DataIngestionConfig:
     train_data_path: str=os.path.join('artifacts',"train.csv")
@@ -23,7 +19,7 @@ class DataIngestion:
         self.ingestion_config=DataIngestionConfig()
 
     def initiate_data_ingestion(self):
-        logging.info("Entered the data ingestion method or component")
+        logging.info("Entered in initiate_data_ingestion method")
         try:
             df=pd.read_csv('notebook\data\stud.csv')
             logging.info('Read the dataset as dataframe')
@@ -39,7 +35,7 @@ class DataIngestion:
 
             test_set.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
 
-            logging.info("Inmgestion of the data iss completed")
+            logging.info("Data Ingestion completed")
 
             return(
                 self.ingestion_config.train_data_path,
